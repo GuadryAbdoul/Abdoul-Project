@@ -1,0 +1,15 @@
+# Utilise une image officielle d'Airflow comme base
+FROM apache/airflow:2.9.1-python3.11
+
+
+# Copie les DAGs dans le dossier Airflow
+COPY ./dags /opt/airflow/dags
+
+# Copie le fichier requirements.txt à la racine de l'image
+COPY requirements.txt /requirements.txt
+
+# Installe les dépendances Python nécessaires sans cache pip
+RUN pip install --no-cache-dir -r /requirements.txt
+
+# Change de dossier de travail (optionnel)
+WORKDIR /opt/airflow
